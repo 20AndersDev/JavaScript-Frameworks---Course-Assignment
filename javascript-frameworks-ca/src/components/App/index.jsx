@@ -1,13 +1,16 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "../navBar";
 import GetItems from "../GetItems";
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <GetItems />
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <GetItems />
+      </div>
+    </Router>
   );
 }
 

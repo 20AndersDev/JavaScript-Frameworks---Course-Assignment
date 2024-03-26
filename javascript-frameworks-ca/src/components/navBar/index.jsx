@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../../Assets/images/logo.jpeg";
+import CartIcon from "../ShoppingCart"; // Import your CartIcon component
 
 const HeaderContainer = styled.header`
   background-color: white;
@@ -31,6 +32,8 @@ const Li = styled.li`
   margin-right: 20px;
   cursor: pointer;
   align-items: center;
+  padding: 5px;
+  font-size: 1.2rem;
 `;
 
 const Input = styled.input`
@@ -56,16 +59,20 @@ const LogoImage = styled.img`
 `;
 
 function Navbar() {
+  const [cartItems, setCartItems] = useState(0);
+
   return (
     <HeaderContainer>
       <Nav>
         <LogoImage src={Logo} alt="Logo" />
+        <Input type="text" placeholder="Search" />
         <Ul>
           <Li>Home</Li>
-          <Li>Shopping cart</Li>
           <Li>Contact</Li>
+          <Li>
+            <CartIcon itemCount={cartItems} />
+          </Li>
         </Ul>
-        <Input type="text" placeholder="Search" />
       </Nav>
     </HeaderContainer>
   );

@@ -1,3 +1,5 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { API_ITEMS } from "../../Shared/apis";
 import styled from "styled-components";
 import { useApi } from "../../Hooks/ApiHooks";
@@ -52,13 +54,15 @@ function GetItems() {
   return (
     <CardContainer>
       {data.map((item) => (
-        <Card key={item.id}>
-          <Title>{item.title}</Title>
-          <Image src={item.image.url} alt={"Image of " + item.title} />
-          <Price>${item.price}</Price>
-          <Rating>Rating: {item.rating}/5</Rating>
-          <button> View product</button>
-        </Card>
+        <Link to={`/ProductPage/${item.id}`}>
+          <Card>
+            <Title>{item.title}</Title>
+            <Image src={item.image.url} alt={"Image of " + item.title} />
+            <Price>${item.price}</Price>
+            <Rating>Rating: {item.rating}/5</Rating>
+            <button>View product</button>
+          </Card>
+        </Link>
       ))}
     </CardContainer>
   );

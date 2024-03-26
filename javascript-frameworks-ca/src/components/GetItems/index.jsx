@@ -1,37 +1,88 @@
 import { API_ITEMS } from "../../Shared/apis";
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+// Styled components for the card
+const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Card = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  width: 350px;
+`;
+
+const Image = styled.img`
+  max-width: 100%;
+  width: 100%;
+  border-radius: 8px;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+`;
+
+const Title = styled.h2`
+  margin-top: 0;
+`;
+
+const Price = styled.h3`
+  margin-bottom: 5px;
+`;
+
+const Rating = styled.p`
+  margin: 0;
+`;
 
 function GetItems() {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const fetchItems = async () => {
+    async function fetchItems() {
       try {
+        setIsLoading(true);
+        setIsError(false);
         const response = await fetch(API_ITEMS);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        const dataArray = Array.isArray(data) ? data : [data];
-        setItems(dataArray);
-        console.log(dataArray);
+        setItems(data.data);
       } catch (error) {
-        console.log(error);
+        setIsError(true);
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
-    };
+    }
 
     fetchItems();
   }, []);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error occurred while fetching data.</div>;
+  }
+
   return (
-    <div>
+    <CardContainer>
       {items.map((item) => (
-        <div key={item.id}>
-          {/* Access item properties directly */}
-          <h1>{item.title}</h1>
-        </div>
+        <Card key={item.id}>
+          <Title>{item.title}</Title>
+          <Image src={item.image.url} alt={"Image of " + item.title} />
+          <Price>${item.price}</Price>
+          <Rating>Rating: {item.rating}/5</Rating>
+        </Card>
       ))}
-    </div>
+    </CardContainer>
   );
 }
 

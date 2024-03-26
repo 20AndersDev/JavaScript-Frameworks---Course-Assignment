@@ -1,10 +1,10 @@
 import { API_ITEMS } from "../../Shared/apis";
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useApi } from "../../Hooks/ApiHooks";
 
 // Styled components for the card
 const CardContainer = styled.div`
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -57,6 +57,7 @@ function GetItems() {
           <Image src={item.image.url} alt={"Image of " + item.title} />
           <Price>${item.price}</Price>
           <Rating>Rating: {item.rating}/5</Rating>
+          <button> View product</button>
         </Card>
       ))}
     </CardContainer>

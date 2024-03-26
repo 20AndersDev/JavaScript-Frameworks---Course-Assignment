@@ -1,6 +1,7 @@
 import { API_ITEMS } from "../../Shared/apis";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useApi } from "../../Hooks/ApiHooks";
 
 // Styled components for the card
 const CardContainer = styled.div`
@@ -38,31 +39,7 @@ const Rating = styled.p`
 `;
 
 function GetItems() {
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    async function fetchItems() {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        const response = await fetch(API_ITEMS);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const data = await response.json();
-        setItems(data.data);
-      } catch (error) {
-        setIsError(true);
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchItems();
-  }, []);
+  const { data, isLoading, isError } = useApi(API_ITEMS);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -74,7 +51,7 @@ function GetItems() {
 
   return (
     <CardContainer>
-      {items.map((item) => (
+      {data.map((item) => (
         <Card key={item.id}>
           <Title>{item.title}</Title>
           <Image src={item.image.url} alt={"Image of " + item.title} />

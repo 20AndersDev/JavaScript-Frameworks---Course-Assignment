@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import { API_ITEMS } from "../../Shared/apis";
 import styled from "styled-components";
 import { useApi } from "../../Hooks/ApiHooks";
@@ -54,7 +54,7 @@ function GetItems() {
   return (
     <CardContainer>
       {data.map((item) => (
-        <Link to={`/ProductPage/${item.id}`}>
+        <Link key={item.id} to={`/ProductPage/${item.id}`}>
           <Card>
             <Title>{item.title}</Title>
             <Image src={item.image.url} alt={"Image of " + item.title} />

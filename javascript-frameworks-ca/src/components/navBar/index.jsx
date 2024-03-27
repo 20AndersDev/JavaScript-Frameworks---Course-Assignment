@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../../Assets/images/logo.jpeg";
-import CartIcon from "../ShoppingCart"; // Import your CartIcon component
+import { Link } from "react-router-dom";
+import CartIcon from "../ShoppingCart";
+import { API_ITEMS } from "../../Shared/apis";
+import { useApi } from "../../Hooks/ApiHooks";
 
 const HeaderContainer = styled.header`
   background-color: white;
@@ -37,12 +40,12 @@ const Li = styled.li`
 `;
 
 const Input = styled.input`
+  width: 100%;
   padding: 5px;
   border-radius: 5px;
   border: solid 1px #ccc;
   @media (max-width: 768px) {
     width: 100%;
-    max-width: 200px;
   }
 `;
 
@@ -58,19 +61,99 @@ const LogoImage = styled.img`
   }
 `;
 
+const SearchBar = styled.div`
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+`;
+
+const SearchResultContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+`;
+
+const SearchResultList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const SearchResultItem = styled.li`
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
+const SearchResultItemImage = styled.img`
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 function Navbar() {
-  const [cartItems, setCartItems] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { data: allItems } = useApi(API_ITEMS);
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  let filteredItems = [];
+  if (searchQuery) {
+    filteredItems = allItems.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
 
   return (
     <HeaderContainer>
       <Nav>
         <LogoImage src={Logo} alt="Logo" />
-        <Input type="text" placeholder="Search" />
+        <SearchBar>
+          <Input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+          />
+          {searchQuery && filteredItems.length > 0 && (
+            <SearchResultContainer>
+              <SearchResultList>
+                {filteredItems.map((item) => (
+                  <SearchResultItem key={item.id}>
+                    <StyledLink to={`/ProductPage/${item.id}`}>
+                      <SearchResultItemImage
+                        src={item.image.url}
+                        alt={item.title}
+                      />
+                      {item.title}
+                    </StyledLink>
+                  </SearchResultItem>
+                ))}
+              </SearchResultList>
+            </SearchResultContainer>
+          )}
+        </SearchBar>
         <Ul>
-          <Li>Home</Li>
+          <Li>
+            <Link to="/">Home</Link>
+          </Li>
           <Li>Contact</Li>
           <Li>
-            <CartIcon itemCount={cartItems} />
+            <CartIcon itemCount={0} />
           </Li>
         </Ul>
       </Nav>

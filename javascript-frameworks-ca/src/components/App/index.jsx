@@ -1,15 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "../../Pages/HomePage";
+import ProductPage from "../../Pages/ProductPage"; // Changed the import name
 import Navbar from "../navBar";
-import GetItems from "../GetItems";
 
 function App() {
   return (
     <Router>
-      <div>
-        <Navbar />
-        <GetItems />
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/ProductPage/:id" element={<ProductPage />} />{" "}
+      </Routes>
     </Router>
   );
 }

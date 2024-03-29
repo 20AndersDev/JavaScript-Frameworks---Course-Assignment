@@ -4,13 +4,14 @@ import Logo from "../../Assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
 import CartIcon from "../ShoppingCart";
 import { API_ITEMS } from "../../Shared/apis";
-import { useApi } from "../../Hooks/ApiHooks";
+import useApi  from "../../Hooks/Apihooks";
 
 const HeaderContainer = styled.header`
   background-color: white;
   color: black;
   padding: 10px 20px;
   height: 100%;
+  top: 0%;
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -151,9 +152,11 @@ function Navbar() {
           <Li>
             <Link to="/">Home</Link>
           </Li>
-          <Li>Contact</Li>
           <Li>
-            <CartIcon itemCount={0} />
+            <Link to="/ContactPage"> Contact </Link>
+          </Li>
+          <Li>
+            <Link to="/CheckoutPage"> <CartIcon itemCount={0} /> </Link>
           </Li>
         </Ul>
       </Nav>

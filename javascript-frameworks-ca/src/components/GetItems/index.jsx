@@ -56,8 +56,8 @@ function GetItems() {
       {data.map((item) => (
         <Link key={item.id} to={`/ProductPage/${item.id}`}>
           <Card>
-            <Title>{item.title}</Title>
             <Image src={item.image.url} alt={"Image of " + item.title} />
+            <Title>{item.title}</Title>
             <Price>${item.price}</Price>
             <Rating>Rating: {item.rating}/5</Rating>
             <button>View product</button>

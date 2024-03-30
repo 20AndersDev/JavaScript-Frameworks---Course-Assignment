@@ -4,9 +4,11 @@ import Logo from "../../Assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
 import CartIcon from "../ShoppingCart";
 import { API_ITEMS } from "../../Shared/apis";
-import useApi  from "../../Hooks/Apihooks";
+import useApi from "../../Hooks/Apihooks";
+import { TiShoppingCart } from "react-icons/ti";
 
 const HeaderContainer = styled.header`
+  position: sticky;
   background-color: white;
   color: black;
   padding: 10px 20px;
@@ -38,6 +40,12 @@ const Li = styled.li`
   align-items: center;
   padding: 5px;
   font-size: 1.2rem;
+`;
+
+const CartStyle = styled(TiShoppingCart)`
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -156,7 +164,10 @@ function Navbar() {
             <Link to="/ContactPage"> Contact </Link>
           </Li>
           <Li>
-            <Link to="/CheckoutPage"> <CartIcon itemCount={0} /> </Link>
+            <Link to="/CheckoutPage">
+              {" "}
+              <CartStyle itemCount={0} />
+            </Link>
           </Li>
         </Ul>
       </Nav>

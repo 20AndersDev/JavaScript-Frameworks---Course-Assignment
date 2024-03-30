@@ -1,14 +1,12 @@
 import Layout from "../../components/Layout";
+import ShoppingCart from "../../components/ShoppingCart";
 
 function CheckoutPage() {
   return (
     <Layout>
-      <div>
-       <h1> Checkout Page</h1>
-      </div>
+      <ShoppingCart />
     </Layout>
   );
 }
-
 
 export default CheckoutPage;

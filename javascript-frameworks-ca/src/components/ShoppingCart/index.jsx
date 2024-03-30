@@ -1,35 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { TiShoppingCart } from "react-icons/ti";
 
-const CartIconContainer = styled.div`
-  position: relative;
-`;
+export const Items = [];
 
-const CartIcon = styled(TiShoppingCart)`
-  font-size: 2rem;
-  color: black;
-  cursor: pointer;
-`;
-
-const ItemCount = styled.span`
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: red;
-  color: white;
-  font-size: 0.8rem;
-  padding: 3px 6px;
-  border-radius: 50%;
-`;
-
-const Cart = ({ itemCount }) => {
+function ShoppingCart() {
   return (
-    <CartIconContainer>
-      <CartIcon />
-      {itemCount > 0 && <ItemCount>{itemCount}</ItemCount>}
-    </CartIconContainer>
+    <div>
+      <h1>Shopping Cart</h1>
+      <div>
+        {Items.map((item) => (
+          <div key={item.id}>
+            <h2>{item.name}</h2>
+            <p>{item.description}</p>
+            <p>{item.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-};
+}
 
-export default Cart;
+export default ShoppingCart;

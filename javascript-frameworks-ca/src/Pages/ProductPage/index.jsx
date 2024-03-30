@@ -5,12 +5,11 @@ import ProductDetail from "../../components/getSingleItem";
 import Layout from "../../components/Layout";
 
 function ProductPage() {
-  return( 
+  return (
     <Layout>
-      <ProductDetail />;
+      <ProductDetail />
     </Layout>
-
-  )
+  );
 }
 
 export default ProductPage;

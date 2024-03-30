@@ -17,11 +17,18 @@ You can find individual items by appending a product ID at the end of the API UR
 
 // Individual product page // 
 
-    ✅ - The individual product page should display data for a single product. 
-    - There should be an Add to cart button which, upon clicking, adds the product to the cart. 
-    ✅ - The product page should display the title of the product, the description and the image. 
-    -  There should also be reviews listed for the product, if there are any. You should use the discountedPrice property to display the price of the product. 
-    -  If there is a difference between the discountedPrice and price properties then that means there is a discount for that product. Calculate what this discount is and display it on the page.
+    ✅  - The individual product page should display data for a single product. 
+   
+         - There should be an Add to cart button which, upon clicking, adds the product to the cart. 
+   
+    ✅  - The product page should display the title of the product, the description and the image. 
+   
+    ✅  -  There should also be reviews listed for the product, if there are any. 
+        
+    ✅   - You should use the discountedPrice property to display the price of the product. 
+          If there is a difference between the discountedPrice and price properties 
+        |   then that means there is a discount for that product. 
+            Calculate what this discount is and display it on the page.
 
 
 // Cart page// 
@@ -40,37 +47,28 @@ You can find individual items by appending a product ID at the end of the API UR
     There will be a contact page which will contain a contact form with the following fields. 
     There must be form validation:
 
-    On the ContactPage, create the following inputs with the following requirements.
+    ✅ On the ContactPage, create the following inputs with the following requirements.
 
-    16.1 Full name (Minimum number of characters is 3, required)
+        ✅ 16.1 Full name (Minimum number of characters is 3, required)
 
-    16.2 Subject (Minimum number of characters is 3, required)
+        ✅ 16.2 Subject (Minimum number of characters is 3, required)
 
-    16.3 Email (Must be a valid email address, required)
+        ✅16.3 Email (Must be a valid email address, required)
 
-    16.4 Body (Minimum number of characters is 3, required)
+        ✅ 16.4 Body (Minimum number of characters is 3, required)
 
-    16.5 Submit button
-    console.log the data from the form once validation requirements are met.
-    Once your project is done, deploy it to Netlify.
-
-
-
-You pages should use a <Layout> component that contains a header and footer. 
-The header should contain a nav bar as well as a Cart icon component that acts 
-as a button as well as displays the current number of items in the cart.
-
-
-    Create a new CRA app.
-    Create a Header that has a Nav.
-    Create a Cart Icon component and position this next to your Nav. This Cart Icon component will have an overlay that displays the number of items in the cart.
-    Create a Footer component.
-    Create a Layout component that has your Header and Footer.
+        ✅ 16.5 Submit button
+            console.log the data from the form once validation requirements are met.
+            Once your project is done, deploy it to Netlify.
 
 
 
+   ✅ You pages should use a <Layout> component that contains a header and footer. 
+        The header should contain a nav bar as well as a Cart icon component that acts 
+         as a button as well as displays the current number of items in the cart.
 
 
+  
 
 
 You will be using React Router to switch between pages.

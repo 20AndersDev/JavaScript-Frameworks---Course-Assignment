@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { API_SINGLE_ITEM } from "../../Shared/apis";
-import { Items } from "../../components/ShoppingCart";
+import useStore from "../Store"; // Importing the useStore hook
 
 const Container = styled.div`
   max-width: 600px;
@@ -45,6 +45,7 @@ const Rating = styled.p`
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { addItemToCart, cartItems } = useStore(); // Accessing the addItemToCart function and cartItems from the store
 
   useEffect(() => {
     async function fetchData() {
@@ -84,8 +85,8 @@ function ProductDetail() {
     return (
       <button
         onClick={() => {
-          Items.push(product);
-          console.log(Items);
+          addItemToCart(product); // Call addItemToCart function with the product
+          console.log(cartItems); // Log the cartItems after adding a product
         }}
       >
         Add to cart

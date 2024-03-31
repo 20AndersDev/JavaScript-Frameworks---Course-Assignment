@@ -166,7 +166,7 @@ function Navbar() {
           <Li>
             <Link to="/CheckoutPage">
               {" "}
-              <CartStyle itemCount={0} />
+              <CartStyle />
             </Link>
           </Li>
         </Ul>

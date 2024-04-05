@@ -1,4 +1,5 @@
 // store.js
+import React from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -13,14 +14,19 @@ const useStore = create(
           );
 
           if (existingItemIndex !== -1) {
-            // If item already exists in cart, update quantity
+            // If item already exists in cart, update quantity and total price
             const updatedCartItems = [...state.cartItems];
             updatedCartItems[existingItemIndex].quantity++;
+            updatedCartItems[existingItemIndex].totalPrice =
+              updatedCartItems[existingItemIndex].quantity * item.price;
             return { cartItems: updatedCartItems };
           } else {
             // If item is not in cart, add it
             return {
-              cartItems: [...state.cartItems, { ...item, quantity: 1 }],
+              cartItems: [
+                ...state.cartItems,
+                { ...item, quantity: 1, totalPrice: item.price },
+              ],
             };
           }
         }),
@@ -30,6 +36,17 @@ const useStore = create(
           const newCartItems = [...state.cartItems];
           newCartItems.splice(index, 1);
           return { cartItems: newCartItems };
+        }),
+      updateQuantity: (index, newQuantity) =>
+        set((state) => {
+          const updatedCartItems = [...state.cartItems];
+          updatedCartItems[index].quantity = newQuantity;
+          updatedCartItems[index].totalPrice =
+            newQuantity * updatedCartItems[index].price;
+          if (newQuantity === 0) {
+            updatedCartItems.splice(index, 1);
+          }
+          return { cartItems: updatedCartItems };
         }),
     }),
     {

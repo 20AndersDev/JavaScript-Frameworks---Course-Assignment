@@ -4,7 +4,7 @@ import Logo from "../../Assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
 import CartIcon from "../ShoppingCart";
 import { API_ITEMS } from "../../Shared/apis";
-import useApi from "../../Hooks/ApiHooks";
+import useApi from "../../Hooks/Apihooks";
 import { TiShoppingCart } from "react-icons/ti";
 
 const HeaderContainer = styled.header`

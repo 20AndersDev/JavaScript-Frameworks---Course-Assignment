@@ -31,7 +31,7 @@ You can find individual items by appending a product ID at the end of the API UR
             Calculate what this discount is and display it on the page.
 
 
-// Cart page// 
+//✅ Cart page// 
     Clicking on the Cart icon will load the Cart page, which will list all of the products as well as a total. 
     The Cart page will have a Checkout button. Clicking this Checkout button then goes to a Checkout success page.
 

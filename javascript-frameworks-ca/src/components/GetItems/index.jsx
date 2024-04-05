@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import { API_ITEMS } from "../../Shared/apis";
 import styled from "styled-components";
-import useApi from "../../Hooks/ApiHooks/";
+import useApi from "../../Hooks/Apihooks/";
 
 // Styled components for the card
 const CardContainer = styled.div`

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { API_SINGLE_ITEM } from "../../Shared/apis";
+import { API_SINGLE_ITEM } from "../../Shared/apis"; // Importing the API_SINGLE_ITEM from the apis file
 import useStore from "../Store"; // Importing the useStore hook
 
 const Container = styled.div`

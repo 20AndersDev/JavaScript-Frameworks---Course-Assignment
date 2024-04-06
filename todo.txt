@@ -36,13 +36,13 @@ You can find individual items by appending a product ID at the end of the API UR
     The Cart page will have a Checkout button. Clicking this Checkout button then goes to a Checkout success page.
 
 
-// Checkout success page //    
+// ✅Checkout success page //    
  - The Checkout success page will display a message to the user notifying them that their order was successful. 
  There should also be a link that lets a user go back to the store. 
  The cart must be cleared if the user gets to the Checkout success page.
 
 
-// Contact Page //
+// ✅Contact Page //
 
     There will be a contact page which will contain a contact form with the following fields. 
     There must be form validation:
@@ -71,12 +71,11 @@ You can find individual items by appending a product ID at the end of the API UR
   
 
 
-You will be using React Router to switch between pages.
+✅ You will be using React Router to switch between pages.
 
 Your design should be responsive. You are welcome to use a CSS Framework, 
 however, you’re encouraged to design from scratch and use styled-components or CSS Modules.
 
-You are not required to use TypeScript.
 
 Your code is expected to be clean and well-formatted.
 Process

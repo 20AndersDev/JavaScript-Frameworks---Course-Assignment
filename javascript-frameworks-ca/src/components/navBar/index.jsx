@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../../Assets/images/logo.jpeg";
 import { Link } from "react-router-dom";
-import CartIcon from "../ShoppingCart";
+import { TiShoppingCart } from "react-icons/ti";
+import useStore from "../Store";
 import { API_ITEMS } from "../../Shared/apis";
 import useApi from "../../Hooks/Apihooks";
-import { TiShoppingCart } from "react-icons/ti";
 
 const HeaderContainer = styled.header`
   position: sticky;
@@ -46,6 +46,18 @@ const CartStyle = styled(TiShoppingCart)`
   font-size: 2rem;
   color: black;
   cursor: pointer;
+  position: relative;
+`;
+
+const CartItemCount = styled.span`
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  background-color: red;
+  color: white;
+  border-radius: 100%;
+  padding: 3px 9px;
+  font-size: 0.9rem;
 `;
 
 const Input = styled.input`
@@ -114,7 +126,13 @@ const StyledLink = styled(Link)`
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const cartItems = useStore((state) => state.cartItems);
   const { data: allItems } = useApi(API_ITEMS);
+
+  useEffect(() => {
+    setCartItemCount(cartItems.length);
+  }, [cartItems]);
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -165,8 +183,10 @@ function Navbar() {
           </Li>
           <Li>
             <Link to="/CheckoutPage">
-              {" "}
               <CartStyle />
+              {cartItemCount > 0 && (
+                <CartItemCount>{cartItemCount}</CartItemCount>
+              )}
             </Link>
           </Li>
         </Ul>

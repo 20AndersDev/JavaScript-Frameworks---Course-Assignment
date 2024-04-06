@@ -5,36 +5,60 @@ import { Link } from "react-router-dom";
 import CheckoutSuccess from "../CheckoutSuccess";
 
 const CartContainer = styled.div`
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 `;
 
+const CartTitle = styled.h1`
+  font-size: 24px;
+  margin-bottom: 20px;
+`;
+
 const CartItem = styled.div`
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const ItemInfo = styled.div`
+  flex: 1;
+  margin-left: 20px;
 `;
 
 const ItemName = styled.h2`
   font-size: 18px;
+  margin-bottom: 5px;
 `;
 
 const ItemDescription = styled.p`
   font-size: 16px;
+  margin-bottom: 10px;
 `;
 
 const ItemPrice = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const ItemQuantity = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 16px;
 `;
 
-const ItemQuantity = styled.span`
-  font-size: 14px;
-  margin-right: 10px;
-`;
-
 const QuantityButton = styled.button`
-  margin-right: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 5px;
 `;
 
 const DeleteButton = styled.button`
@@ -42,13 +66,42 @@ const DeleteButton = styled.button`
   color: white;
   border: none;
   padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
+  margin-left: auto;
 `;
 
 const ItemImage = styled.img`
   width: 100px;
   height: 100px;
   object-fit: cover;
+  border-radius: 8px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const ActionButton = styled.button`
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const CheckoutButton = styled(ActionButton)`
+  margin-left: auto;
+  background-color: green;
+`;
+
+const TotalPrice = styled.div`
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 function ShoppingCart() {
@@ -70,7 +123,7 @@ function ShoppingCart() {
   if (cartItems.length === 0) {
     return (
       <CartContainer>
-        <h1>Shopping Cart</h1>
+        <CartTitle>Shopping Cart</CartTitle>
         <p>Your shopping cart is empty.</p>
       </CartContainer>
     );
@@ -78,42 +131,49 @@ function ShoppingCart() {
 
   return (
     <CartContainer>
-      <h1>Shopping Cart</h1>
-      <button onClick={() => clearCart()}>Clear Cart</button>
-      <Link to={"/CheckoutSuccessPage"}>
-        <button onClick={() => clearCart()}> CheckOut</button>
-      </Link>
+      <CartTitle>Shopping Cart</CartTitle>
+      <ActionButton onClick={() => clearCart()}>Clear Cart</ActionButton>
+
       <div>
         {cartItems.map((item, index) => (
           <CartItem key={index}>
             <ItemImage src={item.image.url} alt={item.name} />
-            <ItemName>{item.name}</ItemName>
-            <ItemDescription>{item.description}</ItemDescription>
-            <ItemPrice>${item.price}</ItemPrice>
-            <ItemQuantity>
-              Quantity:{" "}
-              <QuantityButton
-                onClick={() => handleQuantityChange(index, item.quantity - 1)}
-              >
-                -
-              </QuantityButton>
-              {item.quantity}
-              <QuantityButton
-                onClick={() => handleQuantityChange(index, item.quantity + 1)}
-              >
-                +
-              </QuantityButton>
-            </ItemQuantity>
-            <ItemPrice>Total: ${item.totalPrice}</ItemPrice>{" "}
-            {/* Display total price of the item */}
+            <ItemInfo>
+              <ItemName>{item.title}</ItemName>
+              <ItemDescription>{item.description}</ItemDescription>
+              <ItemPrice>${item.price}</ItemPrice>
+              <ItemQuantity>
+                Quantity:{" "}
+                <QuantityButton
+                  onClick={() => handleQuantityChange(index, item.quantity - 1)}
+                >
+                  -
+                </QuantityButton>
+                {item.quantity}
+                <QuantityButton
+                  onClick={() => handleQuantityChange(index, item.quantity + 1)}
+                >
+                  +
+                </QuantityButton>
+              </ItemQuantity>
+              <ItemPrice>Total: ${item.totalPrice.toFixed(2)}</ItemPrice>{" "}
+            </ItemInfo>
             <DeleteButton onClick={() => removeItemFromCart(index)}>
               Delete
             </DeleteButton>
           </CartItem>
         ))}
+        <ButtonContainer>
+          <TotalPrice>
+            Total Cart Price: ${totalCartPrice.toFixed(2)}
+          </TotalPrice>{" "}
+          <Link to={"/CheckoutSuccessPage"}>
+            <CheckoutButton onClick={() => clearCart()}>
+              Checkout
+            </CheckoutButton>
+          </Link>
+        </ButtonContainer>
       </div>
-      <div>Total Cart Price: ${totalCartPrice}</div>{" "}
-      {/* Display total price of all items */}
     </CartContainer>
   );
 }

@@ -5,6 +5,7 @@ import { API_SINGLE_ITEM } from "../../Shared/apis";
 import useStore from "../Store";
 import ProductReviewRating from "../ItemStarRating";
 import ProductRating from "../ItemStarRating";
+
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -47,11 +48,6 @@ const Price = styled.p`
 const Discount = styled.p`
   font-size: 18px;
   margin-bottom: 10px;
-`;
-
-const Rating = styled.p`
-  font-size: 18px;
-  margin-bottom: 20px;
 `;
 
 const ReviewsContainer = styled.div`

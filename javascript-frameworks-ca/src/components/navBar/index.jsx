@@ -150,7 +150,7 @@ const ShoppingCartContainer = styled.div`
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [cartItemCount, setCartItemCount] = useState(0);
-  const [showMenu, setShowMenu] = useState(false); // State for menu visibility
+  const [showMenu, setShowMenu] = useState(false);
   const cartItems = useStore((state) => state.cartItems);
   const { data: allItems } = useApi(API_ITEMS);
 

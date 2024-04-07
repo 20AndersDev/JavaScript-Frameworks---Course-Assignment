@@ -4,7 +4,6 @@ import styled from "styled-components";
 import useApi from "../../Hooks/Apihooks/";
 import { Link } from "react-router-dom";
 
-// Styled components for the card
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -78,12 +77,10 @@ const StyledLink = styled(Link)`
   color: inherit; /* inherit color from parent */
 `;
 
-// Component for setting the title
 const HomePage = () => {
   useEffect(() => {
     document.title = "The webshop - Home";
-  }, []); // Empty dependency array means it will run only once after mounting
-
+  }, []);
   return null;
 };
 

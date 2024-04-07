@@ -1,5 +1,3 @@
-// ProductRating.jsx
-
 import React from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import styled from "styled-components";

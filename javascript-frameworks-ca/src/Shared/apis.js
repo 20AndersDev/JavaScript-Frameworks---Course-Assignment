@@ -1,4 +1,4 @@
-// Bade URL for the API
+// Base URL for the API
 const API_BASE_URL = "https://v2.api.noroff.dev";
 
 // API endpoints

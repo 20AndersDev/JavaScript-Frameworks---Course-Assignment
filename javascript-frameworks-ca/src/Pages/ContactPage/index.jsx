@@ -78,7 +78,7 @@ function ContactPage() {
   const ContactTitle = () => {
     useEffect(() => {
       document.title = "The webshop - Contact";
-    }, []); // Empty dependency array means it will run only once after mounting
+    }, []);
 
     return null;
   };

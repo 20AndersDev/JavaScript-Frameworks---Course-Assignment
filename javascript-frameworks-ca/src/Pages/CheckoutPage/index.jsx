@@ -6,7 +6,7 @@ function CheckoutPage() {
   const CheckoutTitle = () => {
     useEffect(() => {
       document.title = "The webshop - checkout";
-    }, []); // Empty dependency array means it will run only once after mounting
+    }, []);
 
     return null;
   };

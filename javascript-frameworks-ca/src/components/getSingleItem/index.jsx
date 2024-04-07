@@ -98,7 +98,7 @@ function ProductDetail() {
   const ItemPage = () => {
     useEffect(() => {
       document.title = "The webshop - Item";
-    }, []); // Empty dependency array means it will run only once after mounting
+    }, []);
 
     return null;
   };

@@ -114,7 +114,6 @@ function ShoppingCart() {
     }
   };
 
-  // Calculate total price of all items in the cart
   const totalCartPrice = cartItems.reduce(
     (total, item) => total + item.totalPrice,
     0

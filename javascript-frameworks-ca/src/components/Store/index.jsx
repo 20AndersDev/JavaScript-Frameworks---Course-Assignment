@@ -12,14 +12,12 @@ const useStore = create(
           );
 
           if (existingItemIndex !== -1) {
-            // If item already exists in cart, update quantity and total price
             const updatedCartItems = [...state.cartItems];
             updatedCartItems[existingItemIndex].quantity++;
             updatedCartItems[existingItemIndex].totalPrice =
               updatedCartItems[existingItemIndex].quantity * item.price;
             return { cartItems: updatedCartItems };
           } else {
-            // If item is not in cart, add it
             return {
               cartItems: [
                 ...state.cartItems,
@@ -48,8 +46,8 @@ const useStore = create(
         }),
     }),
     {
-      name: "shopping-cart-storage", // Name for the persisted state
-      getStorage: () => localStorage, // Use localStorage for persistence
+      name: "shopping-cart-storage",
+      getStorage: () => localStorage,
     }
   )
 );

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import styled from "styled-components";
+import { useEffect } from "react";
 
-// Styled components for the CheckoutSuccess page
 const CheckoutSuccessContainer = styled.div`
   text-align: center;
-  margin-top: 50px;
+  margin-top: 200px;
 `;
 
 const Checkmark = styled(FaCheckCircle)`
@@ -28,8 +28,16 @@ const HomeButton = styled.button`
 `;
 
 function CheckoutSuccess() {
+  const CheckoutSuccess = () => {
+    useEffect(() => {
+      document.title = "Checkout Success!";
+    }, []);
+
+    return null;
+  };
   return (
     <CheckoutSuccessContainer>
+      <CheckoutSuccess />
       <Checkmark />
       <h1>Thank You! </h1>
       <h2>

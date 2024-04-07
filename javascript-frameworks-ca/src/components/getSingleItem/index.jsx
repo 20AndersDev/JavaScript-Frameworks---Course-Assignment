@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { API_SINGLE_ITEM } from "../../Shared/apis";
 import useStore from "../Store";
 import ProductReviewRating from "../ItemStarRating";
-
+import ProductRating from "../ItemStarRating";
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -95,6 +95,14 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const { addItemToCart, cartItems } = useStore();
 
+  const ItemPage = () => {
+    useEffect(() => {
+      document.title = "The webshop - Item";
+    }, []); // Empty dependency array means it will run only once after mounting
+
+    return null;
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -140,7 +148,6 @@ function ProductDetail() {
           <Review key={review.id}>
             <ReviewUsername>{review.username}</ReviewUsername>
             <ProductReviewRating rating={review.rating} />{" "}
-            {/* Use ProductReviewRating component */}
             <ReviewDescription>{review.description}</ReviewDescription>
           </Review>
         ))}
@@ -150,6 +157,7 @@ function ProductDetail() {
 
   return (
     <Container>
+      <ItemPage />
       <ImageContainer>
         <Image src={product.image.url} alt={product.title} />
       </ImageContainer>
@@ -166,7 +174,7 @@ function ProductDetail() {
             </Discount>
           </>
         )}
-        <Rating>{product.rating}/5</Rating>
+        <ProductRating rating={product.rating} label="Rating:" />
         <AddToCartButton />
         <Reviews />
       </TextContainer>

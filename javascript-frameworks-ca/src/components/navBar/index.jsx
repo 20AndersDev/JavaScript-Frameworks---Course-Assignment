@@ -15,6 +15,7 @@ const HeaderContainer = styled.header`
   height: 100%;
   top: 0%;
   z-index: 100;
+  border-bottom: 1px solid #ccc;
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -22,7 +23,7 @@ const HeaderContainer = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -31,7 +32,16 @@ const Ul = styled.ul`
   display: flex;
   align-items: center;
   @media (max-width: 768px) {
-    display: none;
+    display: ${({ showMenu }) => (showMenu ? "flex" : "none")};
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 10;
   }
 `;
 
@@ -47,40 +57,36 @@ const CartStyle = styled(TiShoppingCart)`
   font-size: 2rem;
   color: black;
   cursor: pointer;
-  position: relative;
 `;
 
 const CartItemCount = styled.span`
   position: absolute;
-  top: 30px;
-  right: 35px;
+  top: 0px; /* Adjust top position as needed */
+  right: 0px; /* Adjust right position as needed */
   background-color: red;
   color: white;
-  border-radius: 100%;
-  padding: 3px 9px;
-  font-size: 0.9rem;
+  border-radius: 50%; /* Change from 100% to 50% for a circular shape */
+  padding: 3px 6px; /* Adjust padding as needed */
+  font-size: 0.6rem; /* Adjust font size as needed */
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 5px;
   border-radius: 5px;
   border: solid 1px #ccc;
   @media (max-width: 768px) {
     width: 100%;
+    max-width: 300px;
   }
 `;
 
 const LogoImage = styled.img`
   width: 100%;
-  max-width: 250px;
+  max-width: 350px;
+  margin-right: 100px;
   height: 100%;
   object-fit: cover;
   max-height: 100px;
-  @media (max-width: 768px) {
-    width: 120px;
-    height: 120px;
-  }
 `;
 
 const SearchBar = styled.div`
@@ -125,9 +131,26 @@ const StyledLink = styled(Link)`
   color: inherit;
 `;
 
+const MenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const ShoppingCartContainer = styled.div`
+  position: relative;
+  margin-left: 20px;
+`;
+
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [cartItemCount, setCartItemCount] = useState(0);
+  const [showMenu, setShowMenu] = useState(false); // State for menu visibility
   const cartItems = useStore((state) => state.cartItems);
   const { data: allItems } = useApi(API_ITEMS);
 
@@ -137,6 +160,10 @@ function Navbar() {
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
+  };
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
   };
 
   let filteredItems = [];
@@ -149,7 +176,9 @@ function Navbar() {
   return (
     <HeaderContainer>
       <Nav>
-        <LogoImage src={Logo} alt="Logo" />
+        <Link to="/">
+          <LogoImage src={Logo} alt="Logo" />
+        </Link>
         <SearchBar>
           <Input
             type="text"
@@ -161,34 +190,36 @@ function Navbar() {
             <SearchResultContainer>
               <SearchResultList>
                 {filteredItems.map((item) => (
-                  <SearchResultItem key={item.id}>
-                    <StyledLink to={`/ProductPage/${item.id}`}>
+                  <StyledLink to={`/ProductPage/${item.id}`}>
+                    <SearchResultItem key={item.id}>
                       <SearchResultItemImage
                         src={item.image.url}
                         alt={item.title}
                       />
                       {item.title}
-                    </StyledLink>
-                  </SearchResultItem>
+                    </SearchResultItem>
+                  </StyledLink>
                 ))}
               </SearchResultList>
             </SearchResultContainer>
           )}
         </SearchBar>
-        <Ul>
+        <ShoppingCartContainer>
+          <Link to="/CheckoutPage">
+            <CartStyle />
+            {cartItemCount > 0 && (
+              <CartItemCount>{cartItemCount}</CartItemCount>
+            )}
+          </Link>
+        </ShoppingCartContainer>
+        <MenuButton onClick={toggleMenu}>☰</MenuButton>
+        <Ul showMenu={showMenu}>
+          {" "}
           <Li>
-            <Link to="/">Home</Link>
+            <StyledLink to="/">Home</StyledLink>
           </Li>
           <Li>
-            <Link to="/ContactPage"> Contact </Link>
-          </Li>
-          <Li>
-            <Link to="/CheckoutPage">
-              <CartStyle />
-              {cartItemCount > 0 && (
-                <CartItemCount>{cartItemCount}</CartItemCount>
-              )}
-            </Link>
+            <StyledLink to="/ContactPage"> Contact </StyledLink>
           </Li>
         </Ul>
       </Nav>

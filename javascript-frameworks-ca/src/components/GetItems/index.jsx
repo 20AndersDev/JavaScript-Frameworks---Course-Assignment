@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { API_ITEMS } from "../../Shared/apis";
 import styled from "styled-components";
 import useApi from "../../Hooks/Apihooks/";
@@ -38,21 +38,28 @@ const Image = styled.img`
 `;
 
 const Title = styled.h2`
+  justify-content: center;
+  width: 100%;
+  text-align: center;
   margin-top: 10px;
   font-size: 18px;
+  margin-bottom: 30px;
 `;
 
 const Price = styled.h3`
+  justify-content: center;
+  width: 100%;
+  text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 16px;
 `;
 
-const Rating = styled.p`
-  margin: 0;
-`;
-
 const ViewButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -71,6 +78,15 @@ const StyledLink = styled(Link)`
   color: inherit; /* inherit color from parent */
 `;
 
+// Component for setting the title
+const HomePage = () => {
+  useEffect(() => {
+    document.title = "The webshop - Home";
+  }, []); // Empty dependency array means it will run only once after mounting
+
+  return null;
+};
+
 function GetItems() {
   const { data, isLoading, isError } = useApi(API_ITEMS);
 
@@ -83,19 +99,21 @@ function GetItems() {
   }
 
   return (
-    <CardContainer>
-      {data.map((item) => (
-        <StyledLink key={item.id} to={`/ProductPage/${item.id}`}>
-          <Card>
-            <Image src={item.image.url} alt={"Image of " + item.title} />
-            <Title>{item.title}</Title>
-            <Price>${item.price}</Price>
-            <Rating>Rating: {item.rating}/5</Rating>
-            <ViewButton>View product</ViewButton>
-          </Card>
-        </StyledLink>
-      ))}
-    </CardContainer>
+    <div>
+      <HomePage />
+      <CardContainer>
+        {data.map((item) => (
+          <StyledLink key={item.id} to={`/ProductPage/${item.id}`}>
+            <Card>
+              <Image src={item.image.url} alt={"Image of " + item.title} />
+              <Title>{item.title}</Title>
+              <Price>${item.price}</Price>
+              <ViewButton>View product</ViewButton>
+            </Card>
+          </StyledLink>
+        ))}
+      </CardContainer>
+    </div>
   );
 }
 

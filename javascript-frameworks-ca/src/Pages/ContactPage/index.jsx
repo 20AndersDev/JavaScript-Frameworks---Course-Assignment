@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Layout from "../../components/Layout";
 
 const FormContainer = styled.div`
+  width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    max-width: 300px;
 `;
 
 const FormGroup = styled.div`
@@ -72,14 +75,24 @@ function ContactPage() {
     return emailRegex.test(email);
   };
 
+  const ContactTitle = () => {
+    useEffect(() => {
+      document.title = "The webshop - Contact";
+    }, []); // Empty dependency array means it will run only once after mounting
+
+    return null;
+  };
+
   return (
     <Layout>
+      <ContactTitle />
       <FormContainer>
         <h1>Contact Page</h1>
         <form onSubmit={handleSubmit}>
           <FormGroup>
             <Label htmlFor="fullName">Full Name:</Label>
             <Input
+              placeholder="Enter your full name"
               type="text"
               id="fullName"
               name="fullName"
@@ -91,6 +104,7 @@ function ContactPage() {
           <FormGroup>
             <Label htmlFor="subject">Subject:</Label>
             <Input
+              placeholder="Enter the subject of your message"
               type="text"
               id="subject"
               name="subject"
@@ -102,6 +116,7 @@ function ContactPage() {
           <FormGroup>
             <Label htmlFor="email">Email:</Label>
             <Input
+              placeholder="Enter your email address in correct format"
               type="email"
               id="email"
               name="email"
@@ -113,6 +128,7 @@ function ContactPage() {
           <FormGroup>
             <Label htmlFor="body">Body:</Label>
             <TextArea
+              placeholder="Enter your message here..."
               id="body"
               name="body"
               value={formData.body}

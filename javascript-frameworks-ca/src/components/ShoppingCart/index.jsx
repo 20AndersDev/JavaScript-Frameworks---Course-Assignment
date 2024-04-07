@@ -82,6 +82,7 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const ActionButton = styled.button`
@@ -130,9 +131,8 @@ function ShoppingCart() {
 
   return (
     <CartContainer>
-      <CartTitle>Shopping Cart</CartTitle>
+      <CartTitle>Checkout</CartTitle>
       <ActionButton onClick={() => clearCart()}>Clear Cart</ActionButton>
-
       <div>
         {cartItems.map((item, index) => (
           <CartItem key={index}>

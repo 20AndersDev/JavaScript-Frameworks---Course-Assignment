@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import useStore from "../Store";
 import { Link } from "react-router-dom";
-import CheckoutSuccess from "../CheckoutSuccess";
 
 const CartContainer = styled.div`
   max-width: 800px;

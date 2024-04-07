@@ -70,11 +70,6 @@ const ReviewUsername = styled.h3`
   margin-bottom: 5px;
 `;
 
-const ReviewRating = styled.p`
-  font-size: 16px;
-  margin-bottom: 5px;
-`;
-
 const ReviewDescription = styled.p`
   font-size: 16px;
   margin-bottom: 0;

@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
 import { API_ITEMS } from "../../Shared/apis";
 import styled from "styled-components";
 import useApi from "../../Hooks/Apihooks/";

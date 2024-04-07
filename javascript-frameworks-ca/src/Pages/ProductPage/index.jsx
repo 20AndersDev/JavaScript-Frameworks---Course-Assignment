@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import React from "react";
 import ProductDetail from "../../components/getSingleItem";
 import Layout from "../../components/Layout";
 
